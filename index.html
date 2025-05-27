@@ -3,38 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MonTennisCoach</title>
+  <title>MonTennisCoach - Programme IA 30 jours</title>
   <style>
     body {
       font-family: sans-serif;
-      background: #f9fafb;
+      background: #f0f4f8;
       max-width: 480px;
       margin: auto;
       padding: 1rem;
     }
-    h1 {
+    h1, h2 {
       text-align: center;
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
     }
     .card {
       background: white;
       padding: 1rem;
       border-radius: 0.5rem;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    ul {
-      padding-left: 1rem;
-    }
-    input {
-      width: 100%;
-      padding: 0.5rem;
-      margin-top: 0.5rem;
       margin-bottom: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 0.25rem;
     }
-    button {
+    .button {
+      display: block;
       width: 100%;
       padding: 0.75rem;
       background-color: #2563eb;
@@ -43,32 +32,73 @@
       border-radius: 0.25rem;
       cursor: pointer;
       font-weight: bold;
-    }
-    .success {
-      color: green;
-      font-weight: bold;
       margin-top: 1rem;
+    }
+    select, input, textarea {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 0.25rem;
     }
   </style>
 </head>
 <body>
-  <h1>MonTennisCoach – Séance du jour</h1>
+  <h1>MonTennisCoach</h1>
   <div class="card">
-    <ul>
-      <li>Échauffement : 10 min montée de genoux + pas chassés</li>
-      <li>Exercice : Service ciblé zone T (30 balles)</li>
-      <li>Exercice : Jeu de jambes sur coup droit (3x5min)</li>
-      <li>Étirements : 5 minutes</li>
-    </ul>
-    <label for="feedback">Ton ressenti / feedback :</label>
-    <input id="feedback" type="text" placeholder="Fatigué, motivé, douleur bras..." />
-    <button onclick="markDone()">Marquer comme fait ✅</button>
-    <p id="result" class="success" style="display:none">Bravo pour la séance ! 💪</p>
+    <h2>Jour <span id="dayNumber">1</span></h2>
+    <div id="sessionContent">
+      <ul id="activities">
+        <li>Échauffement : 5 min corde à sauter ou course sur place</li>
+        <li>Exercice maison : gainage 3 x 30 sec</li>
+        <li>Mur : 50 frappes coup droit / revers</li>
+        <li>Étirements : 5 minutes</li>
+      </ul>
+    </div>
+    <label for="feedback">Ressenti / progrès :</label>
+    <textarea id="feedback" placeholder="Note ton ressenti ici..."></textarea>
+    <button class="button" onclick="nextDay()">Passer au jour suivant ➡️</button>
   </div>
 
   <script>
-    function markDone() {
-      document.getElementById('result').style.display = 'block';
+    const programme = [
+      [
+        "Échauffement : 5 min corde à sauter ou course sur place",
+        "Exercice maison : gainage 3 x 30 sec",
+        "Mur : 50 frappes coup droit / revers",
+        "Étirements : 5 minutes"
+      ],
+      [
+        "Échauffement : 10 min footing léger",
+        "Terrain : service 30 balles (zones ciblées)",
+        "Maison : fente avant avec raquette (3x10)",
+        "Étirements : 5 minutes"
+      ],
+      [
+        "Repos actif : 30 min vélo ou marche rapide",
+        "Mental : visualisation match 10 min",
+        "Vidéo : analyse d’un point pro",
+        "Étirements : 10 min"
+      ],
+      // jours 4 à 30 à compléter
+    ];
+
+    let currentDay = 0;
+
+    function nextDay() {
+      const feedback = document.getElementById("feedback").value;
+      console.log(`Jour ${currentDay + 1} - Feedback :`, feedback);
+      currentDay++;
+      if (currentDay >= programme.length) {
+        document.getElementById("sessionContent").innerHTML = '<p>🎉 Programme terminé ! Relance ou crée un nouveau cycle !</p>';
+        document.getElementById("dayNumber").textContent = programme.length;
+        return;
+      }
+      document.getElementById("dayNumber").textContent = currentDay + 1;
+      const activityList = programme[currentDay].map(item => `<li>${item}</li>`).join('');
+      document.getElementById("activities").innerHTML = activityList;
+      document.getElementById("feedback").value = "";
     }
   </script>
 </body>
