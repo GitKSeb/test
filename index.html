@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MonTennisCoach</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f9fafb;
+      max-width: 480px;
+      margin: auto;
+      padding: 1rem;
+    }
+    h1 {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .card {
+      background: white;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    ul {
+      padding-left: 1rem;
+    }
+    input {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 0.25rem;
+    }
+    button {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .success {
+      color: green;
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>MonTennisCoach – Séance du jour</h1>
+  <div class="card">
+    <ul>
+      <li>Échauffement : 10 min montée de genoux + pas chassés</li>
+      <li>Exercice : Service ciblé zone T (30 balles)</li>
+      <li>Exercice : Jeu de jambes sur coup droit (3x5min)</li>
+      <li>Étirements : 5 minutes</li>
+    </ul>
+    <label for="feedback">Ton ressenti / feedback :</label>
+    <input id="feedback" type="text" placeholder="Fatigué, motivé, douleur bras..." />
+    <button onclick="markDone()">Marquer comme fait ✅</button>
+    <p id="result" class="success" style="display:none">Bravo pour la séance ! 💪</p>
+  </div>
+
+  <script>
+    function markDone() {
+      document.getElementById('result').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
